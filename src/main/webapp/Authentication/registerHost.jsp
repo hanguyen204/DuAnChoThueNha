@@ -23,7 +23,7 @@
             <c:if test="${not empty message}">
                 <div class="alert alert-danger">${message}</div>
             </c:if>
-            <form action="register_Host" method="post">
+            <form action="/register_Host" method="post">
                 <div class="mb-3">
                     <label class="form-label">Username:</label>
                     <input type="text" class="form-control" name="username" placeholder="Username" pattern="^[a-zA-Z0-9]+([._-][a-zA-Z0-9]+)*@gmail\.com$" required>
