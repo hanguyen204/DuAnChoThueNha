@@ -20,10 +20,13 @@ public class UserRegisterAsHost extends HttpServlet {
         String confirmPassword = req.getParameter("confirm-password");
         User newUser = new User(username, phone, password);
         UserService userService = new UserService();
-        if (!confirmPassword.equals(password) || userService.checkEmail(username)) {
+        if (userService.checkEmail(username)) {
             req.setAttribute("message","Account is duplicated");
             req.getRequestDispatcher("registerHost.jsp").forward(req,resp);
-        } else {
+        } else if (!confirmPassword.equals(password)){
+            req.setAttribute("message","Passwords do not match");
+            req.getRequestDispatcher("registerHost.jsp").forward(req,resp);
+        }else {
             try {
                 userService.insertUser(newUser);
             } catch (ClassNotFoundException e) {
