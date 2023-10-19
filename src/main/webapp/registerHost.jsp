@@ -1,53 +1,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: LENOVO
-  Date: 18/10/2023
-  Time: 9:53 SA
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Form Register</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        h1 {
+            font-family: Arial, sans-serif;
+        }
+
+        .alert-danger {
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
 <body>
-<div style="text-align: center">
-    <form action="register_Host" method="post">
-        <h1 class="form-heading">Đăng kí Làm chủ nhà</h1>
-        <c:if test="${not empty message}">
-            <div style="color: red">${message}</div>
-        </c:if>
-        <div>
-            <i>UserName: </i>
-            <input type="text" name="username" placeholder="User Name" pattern="^[a-zA-Z0-9]+([._-][a-zA-Z0-9]+)*@gmail\\.com$">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-5">
+            <h1 class="text-center">Register to be a homeowner</h1>
+            <c:if test="${not empty message}">
+                <div class="alert alert-danger">${message}</div>
+            </c:if>
+            <form action="register_Host" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Username:</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username" pattern="^[a-zA-Z0-9]+([._-][a-zA-Z0-9]+)*@gmail\.com$" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Avatar:</label>
+                    <input type="text" class="form-control" name="url_image" placeholder="Link Url" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Full Name:</label>
+                    <input type="text" class="form-control" name="full_name" placeholder="Full Name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Address:</label>
+                    <input type="text" class="form-control" name="address" placeholder="Address" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone:</label>
+                    <input type="text" class="form-control" name="phone" placeholder="Phone" pattern="^(\\+?84|0)[0-9]{9,10}$" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password:</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,32}$" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Confirm Password:</label>
+                    <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,32}$" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <i>Avatar: </i>
-            <input type="text" name="url_image" placeholder="Link Url" >
-        </div>
-        <div>
-            <i>Full Name: </i>
-            <input type="text" name="full_name" placeholder="Input Full Name">
-        </div>
-        <div>
-            <i>Address: </i>
-            <input type="text" name="address" placeholder="Input Address">
-        </div>
-        <div>
-            <i>Phone: </i>
-            <input type="text" name="phone" placeholder="Tel" pattern="^(\\+?84|0)[0-9]{9,10}$">
-        </div>
-        <div>
-            <i>Password: </i>
-            <input type="password" name="password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,32}$">
-        </div>
-        <div>
-            <i>Confirm Password: </i>
-            <input type="password" name="confirm-password" placeholder="Confirm Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,32}$">
-        </div>
-        <input type="submit" value="Xác nhận đăng ký" >
-    </form>
+    </div>
 </div>
 </body>
 </html>

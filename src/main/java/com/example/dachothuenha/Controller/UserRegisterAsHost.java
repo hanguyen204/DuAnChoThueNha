@@ -21,10 +21,10 @@ public class UserRegisterAsHost extends HttpServlet {
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirm-password");
-        User newUser = new User(username, url_image, full_name, address, phone, password);
+        User newUser = new User(username,url_image, full_name, address, phone, password);
         UserService userService = new UserService();
         if (!confirmPassword.equals(password) || userService.checkEmail(username)) {
-            req.setAttribute("message","Kiểm tra lại tài khoản và mật khẩu");
+            req.setAttribute("message","Please Review Your Account And Password!!!");
             req.getRequestDispatcher("registerHost.jsp").forward(req,resp);
         } else {
             try {
