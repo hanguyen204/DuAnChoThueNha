@@ -11,7 +11,7 @@ public class UserService implements IUserService {
     private String user = "root";
     private String password = "2004";
 
-    private static final String INSERT_USER = "insert into user (username, url_image, full_name, address, phone, password) values (?,?,?,?,?,?);";
+    private static final String INSERT_USER = "insert into user (username, phone, password) values (?,?,?);";
     private static final String CHECK_MAIL = "SELECT COUNT(*) FROM user WHERE username = ?";
 
     public Connection connection() throws ClassNotFoundException {
@@ -32,11 +32,8 @@ public class UserService implements IUserService {
         try {
             preparedStatement = connection.prepareStatement(INSERT_USER);
             preparedStatement.setString(1, user.getUserName());
-            preparedStatement.setString(2, user.getUrl_image());
-            preparedStatement.setString(3, user.getFull_name());
-            preparedStatement.setString(4, user.getAddress());
-            preparedStatement.setString(5, user.getPhone());
-            preparedStatement.setString(6, user.getPassword());
+            preparedStatement.setString(2, user.getPhone());
+            preparedStatement.setString(3, user.getPassword());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

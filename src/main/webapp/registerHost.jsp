@@ -29,18 +29,6 @@
                     <input type="text" class="form-control" name="username" placeholder="Username" pattern="^[a-zA-Z0-9]+([._-][a-zA-Z0-9]+)*@gmail\.com$" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Avatar:</label>
-                    <input type="text" class="form-control" name="url_image" placeholder="Link Url" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Full Name:</label>
-                    <input type="text" class="form-control" name="full_name" placeholder="Full Name" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Address:</label>
-                    <input type="text" class="form-control" name="address" placeholder="Address" required>
-                </div>
-                <div class="mb-3">
                     <label class="form-label">Phone:</label>
                     <input type="text" class="form-control" name="phone" placeholder="Phone" pattern="^(\\+?84|0)[0-9]{9,10}$" required>
                 </div>

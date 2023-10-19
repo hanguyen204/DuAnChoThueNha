@@ -15,16 +15,13 @@ public class UserRegisterAsHost extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
-        String url_image = req.getParameter("url_image");
-        String full_name = req.getParameter("full_name");
-        String address = req.getParameter("address");
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirm-password");
-        User newUser = new User(username,url_image, full_name, address, phone, password);
+        User newUser = new User(username, phone, password);
         UserService userService = new UserService();
         if (!confirmPassword.equals(password) || userService.checkEmail(username)) {
-            req.setAttribute("message","Please Review Your Account And Password!!!");
+            req.setAttribute("message","Account is duplicated");
             req.getRequestDispatcher("registerHost.jsp").forward(req,resp);
         } else {
             try {
