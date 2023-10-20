@@ -26,19 +26,19 @@
             <form action="/register_Host" method="post">
                 <div class="mb-3">
                     <label class="form-label">Username:</label>
-                    <input type="text" class="form-control" name="username" placeholder="Username" pattern="^[a-zA-Z0-9]+([._-][a-zA-Z0-9]+)*@gmail\.com$" required>
+                    <input type="text" class="form-control" name="username" placeholder="Username" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Phone:</label>
-                    <input type="text" class="form-control" name="phone" placeholder="Phone" pattern="^(\\+?84|0)[0-9]{9,10}$" required>
+                    <input type="text" class="form-control" name="phone" placeholder="Phone" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password:</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,32}$" required>
+                    <input type="password" class="form-control" name="password" placeholder="Password"  required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Confirm Password:</label>
-                    <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,32}$" required>
+                    <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password"  required>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Register</button>
