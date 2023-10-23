@@ -1,5 +1,6 @@
 package com.example.dachothuenha.Service;
 
+import com.example.dachothuenha.Model.Product;
 import com.example.dachothuenha.Model.User;
 
 
@@ -22,7 +23,11 @@ public interface IUserService {
 
     List<User> showUserInformation() throws ClassNotFoundException, SQLException;
 
-    public User showEditProfileUser(int id) throws SQLException, ClassNotFoundException;
+     User showEditProfileUser(int id) throws SQLException, ClassNotFoundException;
 
     boolean updateProfileUser(User user) throws ClassNotFoundException, SQLException;
+
+    List<Product> showProductInformation() throws SQLException, ClassNotFoundException;
+    Product showEditProfileProduct(int id) throws ClassNotFoundException, SQLException;
+    boolean updateProfileProduct(Product product) throws ClassNotFoundException, SQLException;
 }

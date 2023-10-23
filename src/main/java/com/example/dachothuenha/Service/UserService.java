@@ -1,5 +1,6 @@
 package com.example.dachothuenha.Service;
 
+import com.example.dachothuenha.Model.Product;
 import com.example.dachothuenha.Model.User;
 
 import java.sql.*;
@@ -131,7 +132,6 @@ public class UserService implements IUserService {
         User user1 = null;
         PreparedStatement preparedStatement = connection().prepareStatement(SELECT_USER_BY_ID);
         preparedStatement.setInt(1, id);
-        System.out.println(preparedStatement);
         ResultSet rs = preparedStatement.executeQuery();
         while (rs.next()) {
             String username = rs.getString("username");
@@ -154,6 +154,56 @@ public class UserService implements IUserService {
         statement.setString(4, user.getAddress());
         statement.setString(5, user.getPhone());
         statement.setInt(6, user.getId());
+        statement.executeUpdate();
+        statement.close();
+        return false;
+    }
+
+    @Override
+    public List<Product> showProductInformation() throws SQLException, ClassNotFoundException {
+        List<Product> list = new ArrayList<>();
+        PreparedStatement statement = connection().prepareStatement(SELECT_ALL_ACCUSER);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String username = rs.getString("username");
+            String url_image = rs.getString("url_image");
+            String full_name = rs.getString("full_name");
+            String address = rs.getString("address");
+            String phone = rs.getString("phone");
+            list.add(new Product(id, username, url_image, full_name, address, phone));
+        }
+
+        return list;
+    }
+
+    @Override
+    public Product showEditProfileProduct(int id) throws ClassNotFoundException, SQLException {
+        Product product = null;
+        PreparedStatement preparedStatement = connection().prepareStatement(SELECT_USER_BY_ID);
+        preparedStatement.setInt(1, id);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            String username = rs.getString("username");
+            String url_image = rs.getString("url_image");
+            String full_name = rs.getString("full_name");
+            String address = rs.getString("address");
+            String phone = rs.getString("phone");
+            product = new Product(username, url_image, full_name, address, phone);
+
+        }
+        return product;
+    }
+
+    @Override
+    public boolean updateProfileProduct(Product product) throws ClassNotFoundException, SQLException {
+        PreparedStatement statement = connection().prepareStatement(UPDATE_USERS_SQL);
+        statement.setString(1, product.getUserName());
+        statement.setString(2, product.getUrl_image());
+        statement.setString(3, product.getFull_name());
+        statement.setString(4, product.getAddress());
+        statement.setString(5, product.getPhone());
+        statement.setInt(6, product.getId());
         statement.executeUpdate();
         statement.close();
         return false;
