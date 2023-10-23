@@ -44,6 +44,10 @@ public class LoginUserServlet extends HttpServlet {
         return matcher.matches();
     }
 
+
+
+
+
     private boolean checkCredentials(String username, String password) {
         Connection connection = ConnectJDBC.getConnection();
         if (connection == null) {
