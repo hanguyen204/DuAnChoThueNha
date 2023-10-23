@@ -10,4 +10,9 @@ public interface IUserService {
 
 
     public boolean checkEmail(String username);
+
+    List<User> showAccUser() throws SQLException, ClassNotFoundException;
+    User selectUser(int id) throws SQLException, ClassNotFoundException;
+    void updateStatusForUser(User user) throws SQLException, ClassNotFoundException;
+    void updateLockStatusForUser(User user) throws SQLException, ClassNotFoundException;
 }

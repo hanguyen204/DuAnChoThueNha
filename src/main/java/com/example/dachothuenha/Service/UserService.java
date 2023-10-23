@@ -3,7 +3,8 @@ package com.example.dachothuenha.Service;
 import com.example.dachothuenha.Model.User;
 
 import java.sql.*;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UserService implements IUserService {
@@ -13,6 +14,9 @@ public class UserService implements IUserService {
 
     private static final String INSERT_USER = "insert into user (username, phone, password) values (?,?,?);";
     private static final String CHECK_MAIL = "SELECT COUNT(*) FROM user WHERE username = ?";
+
+    private static final String SELECT_ALL_ACCUSER = "select * from accUser";
+    private static final String SELECT_ACCUSER = "select id,full_name,phone,status from accUser where id =?";
 
     public Connection connection() throws ClassNotFoundException {
         Connection con = null;
@@ -58,5 +62,57 @@ public class UserService implements IUserService {
             throw new RuntimeException(e);
         }
     }
+    @Override
+    public List<User> showAccUser() throws SQLException, ClassNotFoundException {
+        List<User> list = new ArrayList<>();
+        Connection connection = connection();
+        PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ACCUSER);
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String full_name = rs.getString("full_name");
+            int phone = rs.getInt("phone");
+            String status = rs.getString("status");
+            list.add(new User(id, full_name, phone, status));
+        }
+        return list;
+    }
+
+    @Override
+    public User selectUser(int id) throws SQLException, ClassNotFoundException {
+        User users = null;
+        PreparedStatement preparedStatement = connection().prepareStatement(SELECT_ACCUSER);
+        preparedStatement.setInt(1, id);
+        System.out.println(preparedStatement);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            String full_name = rs.getString("full_name");
+            int phone = rs.getInt("phone");
+            String status = rs.getString("status");
+            users = new User(id, full_name, phone, status);
+        }
+        return users;
+    }
+
+    @Override
+    public void updateStatusForUser(User user) throws SQLException, ClassNotFoundException {
+        PreparedStatement preparedStatement = connection().prepareStatement("update accUser set status = ? where id = ?");
+        preparedStatement.setString(1, "Đang hoạt động");
+        preparedStatement.setInt(2, user.getId());
+        preparedStatement.executeUpdate();
+        connection().close();
+    }
+
+    @Override
+    public void updateLockStatusForUser(User users) throws SQLException, ClassNotFoundException {
+        PreparedStatement preparedStatement = connection().prepareStatement("update accUser set status = ? where id = ?");
+
+        preparedStatement.setString(1, "Khoá");
+        preparedStatement.setInt(2, users.getId());
+        preparedStatement.executeUpdate();
+        connection().close();
+    }
 }
+
 
