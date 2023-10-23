@@ -16,7 +16,7 @@
             <th>Status</th>
             <th>Action</th>
         </tr>
-        <c:forEach var="user" items="${users}">
+        <c:forEach var="user" items="${list}">
             <tr>
                 <td><c:out value="${user.id}"/></td>
                 <td><c:out value="${user.full_name}"/></td>

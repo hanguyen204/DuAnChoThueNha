@@ -45,10 +45,9 @@ public class ToggleStatusServlet extends HttpServlet {
 
     private void unActive(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("userId"));
-        User existingUser = users.selectUser(id);
-        users.updateLockStatusForUser(existingUser);
+        users.updateLockStatusForUser(id);
         List<User> listUser = users.showAccUser();
-        request.setAttribute("users", listUser);
+        request.setAttribute("list", listUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index/create.jsp");
         dispatcher.forward(request, response);
     }
@@ -56,17 +55,16 @@ public class ToggleStatusServlet extends HttpServlet {
 
     private void active(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("userId"));
-        User existingUser = users.selectUser(id);
-        users.updateStatusForUser(existingUser);
-        List<User> listUser = users.showAccUser();
-        request.setAttribute("users", listUser);
+        users.updateStatusForUser(id);
+        List<User>listUser = users.showAccUser();
+        request.setAttribute("list", listUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index/create.jsp");
         dispatcher.forward(request, response);
     }
 
     private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         List<User> listUser = users.showAccUser();
-        request.setAttribute("users", listUser);
+        request.setAttribute("list", listUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index/create.jsp");
         dispatcher.forward(request, response);
     }

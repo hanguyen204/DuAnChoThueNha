@@ -10,13 +10,11 @@ import java.util.List;
 public class UserService implements IUserService {
     private String url = "jdbc:mysql://localhost:3306/home_rental";
     private String user = "root";
-    private String password = "2004";
+    private String password = "1";
 
     private static final String INSERT_USER = "insert into user (username, phone, password) values (?,?,?);";
     private static final String CHECK_MAIL = "SELECT COUNT(*) FROM user WHERE username = ?";
-
-    private static final String SELECT_ALL_ACCUSER = "select * from accUser";
-    private static final String SELECT_ACCUSER = "select id,full_name,phone,status from accUser where id =?";
+    private String SELECT_ALL_USER = "select * from user";
 
     public Connection connection() throws ClassNotFoundException {
         Connection con = null;
@@ -62,19 +60,19 @@ public class UserService implements IUserService {
             throw new RuntimeException(e);
         }
     }
-    @Override
-    public List<User> showAccUser() throws SQLException, ClassNotFoundException {
-        List<User> list = new ArrayList<>();
-        Connection connection = connection();
-        PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ACCUSER);
-        ResultSet rs = statement.executeQuery();
 
+    @Override
+    public List<User>showAccUser() throws SQLException, ClassNotFoundException {
+        List<User>list = new ArrayList<>();
+        Connection connection = connection();
+        PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USER);
+        ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            int id = rs.getInt("id");
-            String full_name = rs.getString("full_name");
-            int phone = rs.getInt("phone");
-            String status = rs.getString("status");
-            list.add(new User(id, full_name, phone, status));
+           int id = rs.getInt("id");
+           String full_name = rs.getString("full_name");
+           String phone = rs.getString("phone");
+           String status = rs.getString("status");
+           list.add(new User(id,full_name,phone,status));
         }
         return list;
     }
@@ -82,34 +80,29 @@ public class UserService implements IUserService {
     @Override
     public User selectUser(int id) throws SQLException, ClassNotFoundException {
         User users = null;
-        PreparedStatement preparedStatement = connection().prepareStatement(SELECT_ACCUSER);
-        preparedStatement.setInt(1, id);
-        System.out.println(preparedStatement);
-        ResultSet rs = preparedStatement.executeQuery();
-        while (rs.next()) {
-            String full_name = rs.getString("full_name");
-            int phone = rs.getInt("phone");
-            String status = rs.getString("status");
-            users = new User(id, full_name, phone, status);
+        Statement statement = connection().createStatement();
+        ResultSet resultSet = statement.executeQuery("select full_name,phone,status from user where id ='" + id +"'");
+        while (resultSet.next()) {
+            String full_name = resultSet.getString("full_name");
+            String phone = resultSet.getString("phone");
+            String status = resultSet.getString("status");
+            users = new User(full_name, phone, status);
         }
         return users;
     }
 
     @Override
-    public void updateStatusForUser(User user) throws SQLException, ClassNotFoundException {
-        PreparedStatement preparedStatement = connection().prepareStatement("update accUser set status = ? where id = ?");
-        preparedStatement.setString(1, "Đang hoạt động");
-        preparedStatement.setInt(2, user.getId());
+    public void updateStatusForUser(int id) throws SQLException, ClassNotFoundException {
+        PreparedStatement preparedStatement = connection().prepareStatement("update user set status = 'Đang hoạt động' where id = ?");
+        preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         connection().close();
     }
 
     @Override
-    public void updateLockStatusForUser(User users) throws SQLException, ClassNotFoundException {
-        PreparedStatement preparedStatement = connection().prepareStatement("update accUser set status = ? where id = ?");
-
-        preparedStatement.setString(1, "Khoá");
-        preparedStatement.setInt(2, users.getId());
+    public void updateLockStatusForUser(int id) throws SQLException, ClassNotFoundException {
+        PreparedStatement preparedStatement = connection().prepareStatement("update user set status = 'Khóa' where id = ?");
+        preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
         connection().close();
     }
