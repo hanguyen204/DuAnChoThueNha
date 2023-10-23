@@ -43,6 +43,14 @@ public class User {
         this.phone = phone;
     }
 
+    public User(String username, String url_image, String full_name, String address, String phone) {
+        this.userName = username;
+        this.url_image = url_image;
+        this.full_name = full_name;
+        this.address = address;
+        this.phone = phone;
+    }
+
     public int getId() {
         return id;
     }
@@ -107,9 +115,9 @@ public class User {
         this.phone = phone;
     }
 
-    public User(String username, String url_image, String full_name, String address, String phone) {
 
-    }
+
+
 
 
 }

@@ -52,7 +52,6 @@ public class ToggleStatusServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-
     private void active(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("userId"));
         users.updateStatusForUser(id);
