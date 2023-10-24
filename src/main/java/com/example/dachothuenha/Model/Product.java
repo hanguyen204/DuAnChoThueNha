@@ -1,6 +1,6 @@
 package com.example.dachothuenha.Model;
 
-public class User {
+public class Product {
     private int id;
     private String userName;
     private String full_name;
@@ -10,7 +10,7 @@ public class User {
     private String password;
     private String phone;
 
-    public User(int id, String userName, String full_name, String url_image, String address, String status, String password, String phone) {
+    public Product(int id, String userName, String full_name, String url_image, String address, String status, String password, String phone) {
         this.id = id;
         this.userName = userName;
         this.full_name = full_name;
@@ -21,20 +21,20 @@ public class User {
         this.phone = phone;
     }
 
-    public User(int id, String fullName, String phone, String status) {
+    public Product(int id, String fullName, String phone, String status) {
         this.id = id;
         this.full_name = fullName;
         this.phone = phone;
         this.status = status;
     }
 
-    public User(String fullName, String phone, String status) {
+    public Product(String fullName, String phone, String status) {
         this.full_name = fullName;
         this.phone = phone;
         this.status = status;
     }
 
-    public User(int id, String username, String urlImage, String fullName, String address, String phone) {
+    public Product(int id, String username, String urlImage, String fullName, String address, String phone) {
         this.id = id;
         this.userName = username;
         this.url_image = urlImage;
@@ -43,7 +43,7 @@ public class User {
         this.phone = phone;
     }
 
-    public User(String username, String url_image, String full_name, String address, String phone) {
+    public Product(String username, String url_image, String full_name, String address, String phone) {
         this.userName = username;
         this.url_image = url_image;
         this.full_name = full_name;
@@ -114,10 +114,6 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-
-
-
 
 
 }
